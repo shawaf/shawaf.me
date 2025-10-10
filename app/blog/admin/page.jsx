@@ -14,6 +14,8 @@ const AdminPage = () => {
   const [tags, setTags] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [loginSubmitting, setLoginSubmitting] = useState(false);
+  const contentGuidance =
+    "Use Markdown to structure your post. Add nested headings with ## and ###, wrap code in ```language``` blocks, and embed images or videos with ![alt text](url). You can paste YouTube, Vimeo, or direct MP4 links for video embeds.";
 
   useEffect(() => {
     const checkSession = async () => {
@@ -212,6 +214,9 @@ const AdminPage = () => {
           <label htmlFor="content" className="text-sm font-medium">
             Content
           </label>
+          <p className="text-xs text-muted-foreground">
+            {contentGuidance}
+          </p>
           <textarea
             id="content"
             value={content}

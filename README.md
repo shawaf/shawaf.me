@@ -31,4 +31,4 @@ BLOG_ADMIN_USERNAME=your-username
 BLOG_ADMIN_PASSWORD=your-strong-password
 ```
 
-These credentials are checked when you sign in on the dashboard. After authentication you can create programming-focused posts with titles, excerpts, long-form content, and optional tags. Entries are stored in `data/posts.json` and are rendered automatically on the public `/blog` page.
+These credentials are checked when you sign in on the dashboard. After authentication you can create programming-focused posts with titles, excerpts, long-form content, and optional tags. Draft content is authored in Markdown so you can add nested headings, bullet lists, code fences, tables, images, and even video embeds (YouTube, Vimeo, or direct MP4 links). Entries are stored in `data/posts.json` and are rendered automatically on the public `/blog` page.
