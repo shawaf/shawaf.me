@@ -19,33 +19,40 @@ export default async function FeedsPage() {
   const sortedFeeds = feeds.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
 
   return (
-    <div className="min-h-screen bg-[#1a1a1a] text-white">
-      <div className="container mx-auto  h-full">
-        <div className="flex flex-col xl:flex-col items-start gap-20 xl:pt-8 xl:ph-24">
+    <div className="min-h-screen bg-background text-foreground">
+      <div className="container mx-auto h-full">
+        <div className="flex flex-col items-start gap-12 xl:pt-8">
           <div className="text-start xl:text-start order-none xl:order-none">
             <h3 className="h3 mb-6 underline">
               What&apos;s New
             </h3>
           </div>
           {sortedFeeds.map((feed) => (
-            <div key={feed.id} className="rounded-lg p-6">
-              <div className="mb-4 text-sm text-[#00ff9d]" p-6>
-                <span className="text-accent">
-                  {format(new Date(feed.created_at), "MMMM d, yyyy")}
-                </span>
+            <div
+              key={feed.id}
+              className="w-full rounded-lg border border-border bg-card p-6 shadow-sm"
+            >
+              <div className="mb-4 text-sm text-accent">
+                {format(new Date(feed.created_at), "MMMM d, yyyy")}
               </div>
-              <p className="mb-4 text-lg p-6">{feed.content}</p>
+              <p className="mb-4 text-lg text-foreground">{feed.content}</p>
               {feed.image_url && (
                 <Image
                   src={feed.image_url || "/placeholder.svg"}
                   alt="Feed image"
                   height={200}
                   width={200}
-                  className="rounded-lg object-cover p-6"
+                  className="mb-4 rounded-lg object-cover"
                 />
               )}
-              {feed.video_url && <video src={feed.video_url} controls className="w-full rounded-lg mb-4 p-6" />}
-              <hr className="border-t border-gray-600 mt-10" /> {/* Line after */}
+              {feed.video_url && (
+                <video
+                  src={feed.video_url}
+                  controls
+                  className="mb-4 w-full rounded-lg"
+                />
+              )}
+              <hr className="mt-6 border-t border-border/60" />
             </div>
           ))}
         </div>

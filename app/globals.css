@@ -3,8 +3,56 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 20% 45%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 215 20% 65%;
+    --primary: 222 47% 11%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --accent: 152 95% 40%;
+    --accent-foreground: 222 47% 11%;
+    --accent-hover: 152 95% 36%;
+    --outline-color: #0f172a;
+    --outline-hover-color: #00ff99;
+    color-scheme: light;
+  }
+
+  .dark {
+    --background: 222 47% 4%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 7%;
+    --card-foreground: 210 40% 98%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --border: 217 33% 20%;
+    --input: 217 33% 20%;
+    --ring: 152 95% 40%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222 47% 11%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+    --accent: 152 95% 45%;
+    --accent-foreground: 222 47% 11%;
+    --accent-hover: 152 95% 42%;
+    --outline-color: #ffffff;
+    --outline-hover-color: #00ff99;
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-border;
+  }
+
   body {
-    @apply font-primary bg-primary text-white leading-loose;
+    @apply font-primary bg-background text-foreground leading-loose antialiased;
   }
 
   .h1 {
@@ -20,10 +68,10 @@
   }
 
   .text-outline {
-    -webkit-text-stroke: 1px #ffffff;
+    -webkit-text-stroke: 1px var(--outline-color);
   }
 
   .text-outline-hover {
-    -webkit-text-stroke: 1px #00ff99;
+    -webkit-text-stroke: 1px var(--outline-hover-color);
   }
 }

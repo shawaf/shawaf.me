@@ -1,6 +1,9 @@
 import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
+import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/theme-provider";
+
 //Components
 import { Header } from "../components/Header";
 import PageTransitions from "../components/PageTransitions";
@@ -19,11 +22,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={jetbrainMono.variable}>
-        <Header />
-        <StairTransitions />
-        <PageTransitions>{children}</PageTransitions>
+    <html lang="en" suppressHydrationWarning>
+      <body className={cn("min-h-screen bg-background text-foreground", jetbrainMono.variable)}>
+        <ThemeProvider>
+          <Header />
+          <StairTransitions />
+          <PageTransitions>{children}</PageTransitions>
+        </ThemeProvider>
       </body>
     </html>
   );
