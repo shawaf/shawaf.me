@@ -7,12 +7,18 @@ export const metadata = {
     "Technical deep dives, architecture lessons, and engineering leadership insights by Mohamed Elshawaf.",
 };
 
-const formatDate = (date) =>
-  new Date(date).toLocaleDateString(undefined, {
+const formatDate = (date, fallback) => {
+  const value = date || fallback;
+  if (!value) {
+    return "Unpublished";
+  }
+
+  return new Date(value).toLocaleDateString(undefined, {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
+};
 
 const BlogPage = async () => {
   const posts = await getBlogPosts();
@@ -35,7 +41,7 @@ const BlogPage = async () => {
               className="border border-border rounded-xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col"
             >
               <span className="text-sm uppercase tracking-wide text-accent font-semibold mb-2">
-                {formatDate(post.publishedAt)}
+                {formatDate(post.publishedAt, post.updatedAt)}
               </span>
               <h2 className="text-2xl font-bold mb-3 text-left">
                 <Link href={`/blog/${post.slug}`} className="hover:text-accent transition-colors">
