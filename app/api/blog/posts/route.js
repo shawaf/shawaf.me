@@ -13,11 +13,22 @@ export async function GET(request) {
   const includeArchived =
     isAdmin && parseBooleanParam(searchParams.get("includeArchived"));
 
-  const posts = await getBlogPosts({
-    includeDrafts,
-    includeArchived,
-  });
-  return NextResponse.json({ posts });
+  try {
+    const posts = await getBlogPosts({
+      includeDrafts,
+      includeArchived,
+    });
+    return NextResponse.json({ posts });
+  } catch (error) {
+    return NextResponse.json(
+      {
+        error:
+          error.message ||
+          "Unable to load posts. Configure BLOG_DATA_DIR to point at a writable location.",
+      },
+      { status: 500 }
+    );
+  }
 }
 
 export async function POST(request) {

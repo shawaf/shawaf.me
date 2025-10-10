@@ -29,6 +29,9 @@ Add the following environment variables before starting the app:
 ```bash
 BLOG_ADMIN_USERNAME=your-username
 BLOG_ADMIN_PASSWORD=your-strong-password
+# Optional: BLOG_DATA_DIR=./data
 ```
 
-These credentials are checked when you sign in on the dashboard. After authentication you can create programming-focused posts with titles, excerpts, long-form content, and optional tags. Draft content is authored in Markdown so you can add nested headings, bullet lists, code fences, tables, images, and even video embeds (YouTube, Vimeo, or direct MP4 links). Entries are stored in `data/posts.json` and are rendered automatically on the public `/blog` page.
+These credentials are checked when you sign in on the dashboard. After authentication you can create programming-focused posts with titles, excerpts, long-form content, and optional tags. Draft content is authored in Markdown so you can add nested headings, bullet lists, code fences, tables, images, and even video embeds (YouTube, Vimeo, or direct MP4 links).
+
+By default articles are read from `data/posts.json`. When deploying to a serverless platform you should point `BLOG_DATA_DIR` at a writable location (for example, a mounted volume or `/tmp` plus a background sync) so edits can be persisted.
