@@ -43,6 +43,23 @@ These credentials are checked when you sign in on the dashboard. After authentic
 
 By default articles are read from `data/posts.json`. When deploying to a serverless platform you should point `BLOG_DATA_DIR` at a writable location (for example, a mounted volume or `/tmp` plus a background sync) so edits can be persisted.
 
+Add the following environment variables before starting the app:
+
+```bash
+DATABASE_URL=postgres://user:password@host:5432/database
+MONGODB_URI=mongodb+srv://user:password@cluster.example.com/?retryWrites=true&w=majority
+EMAIL_USER=your-smtp-username
+EMAIL_PASS=your-smtp-password
+EMAIL_RECEIVER=you@example.com
+BLOG_ADMIN_USERNAME=your-username
+BLOG_ADMIN_PASSWORD=your-strong-password
+# Optional: BLOG_DATA_DIR=./data
+```
+
+These credentials are checked when you sign in on the dashboard. After authentication you can create programming-focused posts with titles, excerpts, long-form content, and optional tags. Draft content is authored in Markdown so you can add nested headings, bullet lists, code fences, tables, images, and even video embeds (YouTube, Vimeo, or direct MP4 links).
+
+By default articles are read from `data/posts.json`. When deploying to a serverless platform you should point `BLOG_DATA_DIR` at a writable location (for example, a mounted volume or `/tmp` plus a background sync) so edits can be persisted.
+
 ## Private blog publishing
 
 The in-site blog is editable through a hidden dashboard located at `/blog/admin`. The dashboard is protected with credentials so that only you can publish new articles.
