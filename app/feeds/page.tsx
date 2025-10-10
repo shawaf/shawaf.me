@@ -2,14 +2,46 @@ import { format } from "date-fns"
 import Image from "next/image"
 import { Pool } from "pg";
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false },
-});
+let pool: Pool | null = null;
 
-async function getFeeds() {
-  const result = await pool.query("SELECT * FROM feeds ORDER BY created_at DESC");
-  return result.rows;
+function getPool() {
+  if (!process.env.DATABASE_URL) {
+    return null;
+  }
+
+  if (!pool) {
+    pool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+      ssl: { rejectUnauthorized: false },
+    });
+  }
+
+  return pool;
+}
+
+type FeedRow = {
+  id: string;
+  content: string;
+  image_url: string | null;
+  video_url: string | null;
+  created_at: string;
+};
+
+async function getFeeds(): Promise<FeedRow[]> {
+  const activePool = getPool();
+  if (!activePool) {
+    return [];
+  }
+
+  try {
+    const result = await activePool.query<FeedRow>(
+      "SELECT * FROM feeds ORDER BY created_at DESC",
+    );
+    return result.rows;
+  } catch (error) {
+    console.error("Failed to fetch feeds", error);
+    return [];
+  }
 }
 
 export default async function FeedsPage() {

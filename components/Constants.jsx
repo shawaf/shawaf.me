@@ -9,11 +9,7 @@ export const navList = [
     },
     {
       name: "blog",
-      path: "https://medium.com/@mohamedelshawaf",
-    },
-    {
-      name: "Latest",
-      path: "/feeds",
+      path: "/blog",
     },
     {
       name: "contact",
