@@ -65,11 +65,14 @@ const AdminPage = () => {
     try {
       const response = await fetch(
         "/api/blog/posts?includeDrafts=1&includeArchived=1",
-        { cache: "no-store" }
+        { cache: "no-store", credentials: "include" }
       );
 
       if (!response.ok) {
         const data = await response.json().catch(() => ({}));
+        if (response.status === 401) {
+          setIsAuthenticated(false);
+        }
         throw new Error(data.error || "Unable to load posts");
       }
 
@@ -85,7 +88,10 @@ const AdminPage = () => {
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const response = await fetch("/api/blog/session", { cache: "no-store" });
+        const response = await fetch("/api/blog/session", {
+          cache: "no-store",
+          credentials: "include",
+        });
         if (response.ok) {
           setIsAuthenticated(true);
           await fetchPosts();
@@ -180,6 +186,7 @@ const AdminPage = () => {
       const response = await fetch("/api/blog/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify(payload),
       });
 
@@ -228,6 +235,7 @@ const AdminPage = () => {
       const response = await fetch(endpoint, {
         method,
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify(payload),
       });
 
@@ -284,6 +292,7 @@ const AdminPage = () => {
       const response = await fetch(`/api/blog/posts/${post.slug}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ status: "archived" }),
       });
 
@@ -304,6 +313,7 @@ const AdminPage = () => {
       const response = await fetch(`/api/blog/posts/${post.slug}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ status: "draft" }),
       });
 
@@ -334,6 +344,7 @@ const AdminPage = () => {
     try {
       const response = await fetch(`/api/blog/posts/${post.slug}`, {
         method: "DELETE",
+        credentials: "include",
       });
 
       const data = await response.json().catch(() => ({}));
