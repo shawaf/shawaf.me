@@ -29,7 +29,7 @@ const BlogPage = async () => {
         <h1 className="h1 mb-6">Thoughts on Building Reliable Software</h1>
         <p className="text-muted-foreground">
           Curated essays about shipping resilient products, leading high-performing teams,
-          and exploring modern web technologies. New articles are added through a private
+          and exploring modern technologies. New articles are added through a private
           publishing workflow so every post is intentional and hands-on.
         </p>
       </div>
@@ -66,8 +66,7 @@ const BlogPage = async () => {
         </div>
       ) : (
         <p className="text-muted-foreground text-center">
-          No articles have been published yet. Sign in to the private dashboard to share your
-          latest engineering lessons.
+          No articles have been published yet.
         </p>
       )}
     </section>
