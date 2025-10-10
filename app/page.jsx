@@ -19,7 +19,7 @@ const Home = () => {
               <span className="text-accent"> Mohamed Elshawaf</span>
             </h1>
             <span className="text-xl">Software Engineer</span>
-            <p className="max-w-[500px] mb-9 text-white/80">
+            <p className="max-w-[500px] mb-9 text-muted-foreground">
               I have 10+ years experience crafting scalable medical, fintech,
               and e-commerce applications, With a proven ability to deliver
               high-quality solutions using cutting-edge technologies and
@@ -42,8 +42,8 @@ const Home = () => {
               <div className="mb-8 xl:mb-0">
                 <Social
                   containerStyles="flex gap-6"
-                  iconStyles="h-9 w-9 border border-accent rounded-full flex justify-center items-center text-accent text-base 
-                  hover:bg-accent hover:text-primary hover:transition-all duration-500"
+                  iconStyles="h-9 w-9 border border-accent rounded-full flex justify-center items-center text-accent text-base
+                  hover:bg-accent hover:text-accent-foreground transition-colors duration-300"
                 />
               </div>
             </div>

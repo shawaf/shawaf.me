@@ -90,10 +90,10 @@ export default function AppsPrivacyPolicyPage() {
   return (
     <section className="min-h-[80vh] py-12 xl:py-20">
       <div className="container mx-auto max-w-4xl">
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+        <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
           Apps Privacy Policy
         </h1>
-        <p className="text-white/70 mb-10">
+        <p className="text-muted-foreground mb-10">
           Effective date: {new Date().getFullYear()} — This policy applies to all
           mobile and web applications published by Mohamed Elshawaf unless a more
           specific policy is provided within the product.
@@ -102,12 +102,14 @@ export default function AppsPrivacyPolicyPage() {
           {sections.map((section) => (
             <div
               key={section.title}
-              className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur"
+              className="rounded-2xl border border-border bg-card p-6 shadow-sm"
             >
-              <h2 className="text-2xl font-semibold text-white mb-3">
+              <h2 className="text-2xl font-semibold text-foreground mb-3">
                 {section.title}
               </h2>
-              <p className="text-white/70 leading-relaxed">{section.content}</p>
+              <p className="text-muted-foreground leading-relaxed">
+                {section.content}
+              </p>
             </div>
           ))}
         </div>
