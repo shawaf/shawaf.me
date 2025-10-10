@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Building Resilient APIs with Next.js Route Handlers",
+    "slug": "building-resilient-apis-nextjs",
+    "excerpt": "A practical guide to structuring type-safe route handlers that scale with your product.",
+    "content": "When Next.js introduced route handlers it became dramatically easier to colocate APIs with the pages that consume them. The convenience can be dangerous though: without guard rails you end up with sprawling handler files and missing validation. In this article I walk through a lightweight layering approach that keeps business logic isolated, enforces runtime validation, and still ships quickly.\n\nWe start by leaning on utility functions that describe the shape of our data. That allows us to centralize validation, reuse logic across handlers, and unlock editor auto-completion. From there we explore incremental hardening techniques like response helpers, request context objects, and cleanly separating cross-cutting concerns such as authentication.\n\nBy the end you will have a repeatable pattern that makes your API surface resilient even as the codebase grows. The patterns are intentionally framework-agnostic so you can adapt them to Express, Fastify, or any other runtime.",
+    "tags": ["next.js", "api design", "best practices"],
+    "publishedAt": "2024-03-12T09:00:00.000Z"
+  },
+  {
+    "title": "Why Strong Domain Models Make Fintech Software Safer",
+    "slug": "domain-models-fintech-software",
+    "excerpt": "Lessons learned from shipping regulated products where a typo can trigger compliance incidents.",
+    "content": "Fintech platforms are unforgiving; there is no room for fuzzy concepts or loosely-typed money objects. Over the last decade I have leaned heavily on domain-driven design (DDD) to keep teams focused on the truth of the business while writing code that regulators can trust.\n\nWe will review the tactical DDD patterns that deliver the highest leverage: value objects for currency and rounding rules, domain events to make transaction flows auditable, and bounded contexts that keep risk assessment isolated from customer onboarding.\n\nAlong the way I share concrete examples from projects that moved billions of dollars and the mistakes we learned to avoid. The takeaway is simple: great domain models are the fastest way to ship features without sleepless nights.",
+    "tags": ["fintech", "ddd", "software architecture"],
+    "publishedAt": "2024-02-01T10:30:00.000Z"
+  },
+  {
+    "title": "Tuning React Performance for Large Medical Dashboards",
+    "slug": "tuning-react-performance-medical-dashboards",
+    "excerpt": "Profiling strategies and architectural choices that keep mission-critical dashboards responsive.",
+    "content": "Healthcare dashboards demand predictable performance because clinicians rely on them during stressful moments. In this deep dive I outline the workflow my teams use to keep frame rates high even when rendering thousands of data points.\n\nWe start with instrumentation—without measuring time-to-interaction and flame charts you are flying blind. Once we have a baseline we explore component-level optimizations, memoization strategies, and ways to offload heavy computations to web workers.\n\nFinally, we discuss how to bake performance reviews into your delivery process so regressions are caught before reaching production. A little discipline here keeps the clinical staff focused on patients, not spinning loading indicators.",
+    "tags": ["react", "performance", "healthtech"],
+    "publishedAt": "2023-11-20T14:15:00.000Z"
+  }
+]

@@ -1,11 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { FiDownload } from "react-icons/fi";
-import Link from "next/link";
 
 //Components
 import Social from "@/components/Social";
 import Photo from "@/components/Photo";
-import Stats from "@/components/Stats";
 
 const Home = () => {
   return (
@@ -55,8 +53,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-      {/* stats */}
-      <Stats />
     </section>
   );
 };
