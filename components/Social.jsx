@@ -17,7 +17,7 @@ const Social = ({ containerStyles, iconStyles }) => {
           <Link
             href={item.path}
             key={index}
-            className={iconStyles}
+            className={`flex items-center justify-center ${iconStyles}`}
             target="_blank"
           >
             {item.icon}
