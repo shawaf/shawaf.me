@@ -56,11 +56,11 @@ const BlogPage = async () => {
           </div>
 
           {mediumPosts.length ? (
-            <div className="grid auto-rows-fr grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
               {mediumPosts.map((post) => (
                 <article
-                  key={post.link}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/70 bg-background/70 p-6 text-left shadow-md transition hover:-translate-y-1 hover:border-accent/60 hover:shadow-accent/20"
+                  key={post.slug}
+                  className="group relative flex h-[360px] flex-col overflow-hidden rounded-2xl border border-border/70 bg-background/70 p-6 text-left shadow-md transition hover:-translate-y-1 hover:border-accent/60 hover:shadow-accent/20"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
                   <div className="relative mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
@@ -68,12 +68,22 @@ const BlogPage = async () => {
                     <span className="rounded-full bg-muted/70 px-2 py-1">{formatDate(post.publishedAt)}</span>
                   </div>
                   <h2 className="relative text-xl font-semibold leading-tight text-foreground transition group-hover:text-accent">
-                    <Link href={post.link} target="_blank" className="inline-flex items-start gap-2">
+                    <Link href={`/blog/medium/${post.slug}`} className="inline-flex items-start gap-2">
                       <span className="flex-1">{post.title}</span>
                       <ArrowUpRight className="mt-1 h-4 w-4" />
                     </Link>
                   </h2>
-                  <p className="relative mt-3 flex-1 text-sm text-muted-foreground">{post.excerpt}</p>
+                  <p
+                    className="relative mt-3 flex-1 text-sm text-muted-foreground"
+                    style={{
+                      display: "-webkit-box",
+                      WebkitLineClamp: 4,
+                      WebkitBoxOrient: "vertical",
+                      overflow: "hidden",
+                    }}
+                  >
+                    {post.excerpt}
+                  </p>
                   {post.categories?.length ? (
                     <div className="relative mt-4 flex flex-wrap gap-2 text-xs">
                       {post.categories.slice(0, 4).map((tag) => (
@@ -105,11 +115,11 @@ const BlogPage = async () => {
                   </p>
                 </div>
               </div>
-              <div className="grid auto-rows-fr grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
                 {posts.map((post) => (
                   <article
                     key={post.slug}
-                    className="flex h-full flex-col rounded-2xl border border-border/70 bg-card/70 p-5 text-left shadow-sm transition hover:-translate-y-1 hover:border-accent/60"
+                    className="flex h-[320px] flex-col overflow-hidden rounded-2xl border border-border/70 bg-card/70 p-5 text-left shadow-sm transition hover:-translate-y-1 hover:border-accent/60"
                   >
                     <span className="text-xs font-semibold uppercase tracking-wide text-accent">
                       {formatDate(post.publishedAt, post.updatedAt)}
@@ -119,7 +129,17 @@ const BlogPage = async () => {
                         {post.title}
                       </Link>
                     </h3>
-                    <p className="mt-2 flex-1 text-sm text-muted-foreground">{post.excerpt}</p>
+                    <p
+                      className="mt-2 flex-1 text-sm text-muted-foreground"
+                      style={{
+                        display: "-webkit-box",
+                        WebkitLineClamp: 4,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                      }}
+                    >
+                      {post.excerpt}
+                    </p>
                     {post.tags?.length ? (
                       <div className="mt-4 flex flex-wrap gap-2 text-xs text-muted-foreground">
                         {post.tags.map((tag) => (
