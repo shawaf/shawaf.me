@@ -1,4 +1,4 @@
-import Image from "next/image";
+/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { ArrowUpRight, Rss } from "lucide-react";
 
@@ -33,6 +33,9 @@ const MediumBadge = () => (
   </span>
 );
 
+const mediumFallbackImage =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Crect width='800' height='400' fill='%23222'/%3E%3Ctext x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23fff' font-family='Inter, Arial, sans-serif' font-size='72' font-weight='700'%3EMedium%3C/text%3E%3C/svg%3E";
+
 const BlogPage = async () => {
   const [posts, mediumPosts] = await Promise.all([getBlogPosts(), getMediumPosts(9)]);
 
@@ -57,32 +60,29 @@ const BlogPage = async () => {
           </div>
 
           {mediumPosts.length ? (
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               {mediumPosts.map((post) => (
                 <a
                   key={post.slug}
                   href={post.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative flex h-[420px] flex-col overflow-hidden rounded-2xl border border-border/70 bg-background/70 p-6 text-left shadow-md transition hover:-translate-y-1 hover:border-accent/60 hover:shadow-accent/20"
+                  className="group relative flex h-[460px] flex-col overflow-hidden rounded-2xl border border-border/70 bg-background/70 p-6 text-left shadow-md transition hover:-translate-y-1 hover:border-accent/60 hover:shadow-accent/20"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
-                  <div className="relative mb-4 h-40 overflow-hidden rounded-xl border border-border/50 bg-muted/60">
-                    {post.image ? (
-                      <Image
-                        src={post.image}
-                        alt={post.title}
-                        fill
-                        unoptimized
-                        className="object-cover transition duration-500 group-hover:scale-[1.03]"
-                        sizes="(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw"
-                        priority={false}
-                      />
-                    ) : (
-                      <div className="flex h-full items-center justify-center bg-gradient-to-br from-muted to-background text-lg font-bold uppercase tracking-[0.3em] text-muted-foreground">
-                        Medium
-                      </div>
-                    )}
+                  <div className="relative mb-4 h-48 overflow-hidden rounded-xl border border-border/50 bg-muted/60">
+                    <img
+                      src={post.image || mediumFallbackImage}
+                      alt={post.title}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                      onError={(event) => {
+                        const target = event.currentTarget;
+                        if (target.dataset.fallbackApplied) return;
+                        target.dataset.fallbackApplied = "true";
+                        target.src = mediumFallbackImage;
+                      }}
+                    />
                   </div>
                   <div className="relative flex items-center gap-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                     <MediumBadge />
