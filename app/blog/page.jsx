@@ -70,18 +70,13 @@ const BlogPage = async () => {
                   className="group relative flex h-[460px] flex-col overflow-hidden rounded-2xl border border-border/70 bg-background/70 p-6 text-left shadow-md transition hover:-translate-y-1 hover:border-accent/60 hover:shadow-accent/20"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
-                  <div className="relative mb-4 h-48 overflow-hidden rounded-xl border border-border/50 bg-muted/60">
-                    <img
-                      src={post.image || mediumFallbackImage}
-                      alt={post.title}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
-                      onError={(event) => {
-                        const target = event.currentTarget;
-                        if (target.dataset.fallbackApplied) return;
-                        target.dataset.fallbackApplied = "true";
-                        target.src = mediumFallbackImage;
-                      }}
+                  <div
+                    className="relative mb-4 h-48 overflow-hidden rounded-xl border border-border/50 bg-muted/60"
+                    aria-label={post.title}
+                  >
+                    <div
+                      className="absolute inset-0 bg-center bg-cover transition duration-500 group-hover:scale-[1.03]"
+                      style={{ backgroundImage: `url(${post.image || mediumFallbackImage})` }}
                     />
                   </div>
                   <div className="relative flex items-center gap-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
