@@ -79,8 +79,8 @@ const BlogPage = async () => {
                         priority={false}
                       />
                     ) : (
-                      <div className="flex h-full items-center justify-center bg-gradient-to-br from-muted to-background text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                        Medium Article
+                      <div className="flex h-full items-center justify-center bg-gradient-to-br from-muted to-background text-lg font-bold uppercase tracking-[0.3em] text-muted-foreground">
+                        Medium
                       </div>
                     )}
                   </div>
