@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Rss } from "lucide-react";
 
@@ -58,26 +59,45 @@ const BlogPage = async () => {
           {mediumPosts.length ? (
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
               {mediumPosts.map((post) => (
-                <article
+                <a
                   key={post.slug}
-                  className="group relative flex h-[360px] flex-col overflow-hidden rounded-2xl border border-border/70 bg-background/70 p-6 text-left shadow-md transition hover:-translate-y-1 hover:border-accent/60 hover:shadow-accent/20"
+                  href={post.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative flex h-[420px] flex-col overflow-hidden rounded-2xl border border-border/70 bg-background/70 p-6 text-left shadow-md transition hover:-translate-y-1 hover:border-accent/60 hover:shadow-accent/20"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
-                  <div className="relative mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  <div className="relative mb-4 h-40 overflow-hidden rounded-xl border border-border/50 bg-muted/60">
+                    {post.image ? (
+                      <Image
+                        src={post.image}
+                        alt={post.title}
+                        fill
+                        className="object-cover transition duration-500 group-hover:scale-[1.03]"
+                        sizes="(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw"
+                        priority={false}
+                      />
+                    ) : (
+                      <div className="flex h-full items-center justify-center bg-gradient-to-br from-muted to-background text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+                        Medium Article
+                      </div>
+                    )}
+                  </div>
+                  <div className="relative flex items-center gap-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                     <MediumBadge />
                     <span className="rounded-full bg-muted/70 px-2 py-1">{formatDate(post.publishedAt)}</span>
                   </div>
-                  <h2 className="relative text-xl font-semibold leading-tight text-foreground transition group-hover:text-accent">
-                    <Link href={`/blog/medium/${post.slug}`} className="inline-flex items-start gap-2">
-                      <span className="flex-1">{post.title}</span>
+                  <h2 className="relative mt-3 text-xl font-semibold leading-tight text-foreground transition group-hover:text-accent">
+                    <span className="inline-flex items-start gap-2">
+                      <span className="flex-1 text-left">{post.title}</span>
                       <ArrowUpRight className="mt-1 h-4 w-4" />
-                    </Link>
+                    </span>
                   </h2>
                   <p
                     className="relative mt-3 flex-1 text-sm text-muted-foreground"
                     style={{
                       display: "-webkit-box",
-                      WebkitLineClamp: 4,
+                      WebkitLineClamp: 3,
                       WebkitBoxOrient: "vertical",
                       overflow: "hidden",
                     }}
@@ -96,7 +116,7 @@ const BlogPage = async () => {
                       ))}
                     </div>
                   ) : null}
-                </article>
+                </a>
               ))}
             </div>
           ) : (
