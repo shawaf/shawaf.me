@@ -73,6 +73,7 @@ const BlogPage = async () => {
                         src={post.image}
                         alt={post.title}
                         fill
+                        unoptimized
                         className="object-cover transition duration-500 group-hover:scale-[1.03]"
                         sizes="(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw"
                         priority={false}
@@ -97,7 +98,7 @@ const BlogPage = async () => {
                     className="relative mt-3 flex-1 text-sm text-muted-foreground"
                     style={{
                       display: "-webkit-box",
-                      WebkitLineClamp: 3,
+                      WebkitLineClamp: 4,
                       WebkitBoxOrient: "vertical",
                       overflow: "hidden",
                     }}
