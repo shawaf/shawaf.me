@@ -14,7 +14,19 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: "https",
-                hostname: "**", // Allows all HTTPS images
+                hostname: "miro.medium.com",
+            },
+            {
+                protocol: "https",
+                hostname: "cdn-images-1.medium.com",
+            },
+            {
+                protocol: "https",
+                hostname: "images.unsplash.com",
+            },
+            {
+                protocol: "https",
+                hostname: "**",
             },
         ],
     }

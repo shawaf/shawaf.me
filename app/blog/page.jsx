@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { ArrowUpRight, Rss } from "lucide-react";
 
@@ -9,6 +10,8 @@ export const metadata = {
   description:
     "Technical deep dives, architecture lessons, and engineering leadership insights by Mohamed Elshawaf.",
 };
+
+export const dynamic = "force-dynamic";
 
 const formatDate = (date, fallback) => {
   const value = date || fallback;
@@ -29,6 +32,9 @@ const MediumBadge = () => (
     Medium Feed
   </span>
 );
+
+const mediumFallbackImage =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Crect width='800' height='400' fill='%23222'/%3E%3Ctext x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23fff' font-family='Inter, Arial, sans-serif' font-size='72' font-weight='700'%3EMedium%3C/text%3E%3C/svg%3E";
 
 const BlogPage = async () => {
   const [posts, mediumPosts] = await Promise.all([getBlogPosts(), getMediumPosts(9)]);
@@ -54,24 +60,46 @@ const BlogPage = async () => {
           </div>
 
           {mediumPosts.length ? (
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               {mediumPosts.map((post) => (
-                <article
-                  key={post.link}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/70 bg-background/70 p-6 text-left shadow-md transition hover:-translate-y-1 hover:border-accent/60 hover:shadow-accent/20"
+                <a
+                  key={post.slug}
+                  href={post.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative flex h-[460px] flex-col overflow-hidden rounded-2xl border border-border/70 bg-background/70 p-6 text-left shadow-md transition hover:-translate-y-1 hover:border-accent/60 hover:shadow-accent/20"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
-                  <div className="relative mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  <div
+                    className="relative mb-4 h-48 overflow-hidden rounded-xl border border-border/50 bg-muted/60"
+                    aria-label={post.title}
+                  >
+                    <div
+                      className="absolute inset-0 bg-center bg-cover transition duration-500 group-hover:scale-[1.03]"
+                      style={{ backgroundImage: `url(${post.image || mediumFallbackImage})` }}
+                    />
+                  </div>
+                  <div className="relative flex items-center gap-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                     <MediumBadge />
                     <span className="rounded-full bg-muted/70 px-2 py-1">{formatDate(post.publishedAt)}</span>
                   </div>
-                  <h2 className="relative text-xl font-semibold leading-tight text-foreground transition group-hover:text-accent">
-                    <Link href={post.link} target="_blank" className="inline-flex items-start gap-2">
-                      <span className="flex-1">{post.title}</span>
+                  <h2 className="relative mt-3 text-xl font-semibold leading-tight text-foreground transition group-hover:text-accent">
+                    <span className="inline-flex items-start gap-2">
+                      <span className="flex-1 text-left">{post.title}</span>
                       <ArrowUpRight className="mt-1 h-4 w-4" />
-                    </Link>
+                    </span>
                   </h2>
-                  <p className="relative mt-3 flex-1 text-sm text-muted-foreground">{post.excerpt}</p>
+                  <p
+                    className="relative mt-3 flex-1 text-sm text-muted-foreground"
+                    style={{
+                      display: "-webkit-box",
+                      WebkitLineClamp: 4,
+                      WebkitBoxOrient: "vertical",
+                      overflow: "hidden",
+                    }}
+                  >
+                    {post.excerpt}
+                  </p>
                   {post.categories?.length ? (
                     <div className="relative mt-4 flex flex-wrap gap-2 text-xs">
                       {post.categories.slice(0, 4).map((tag) => (
@@ -84,7 +112,7 @@ const BlogPage = async () => {
                       ))}
                     </div>
                   ) : null}
-                </article>
+                </a>
               ))}
             </div>
           ) : (
@@ -103,11 +131,11 @@ const BlogPage = async () => {
                   </p>
                 </div>
               </div>
-              <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
                 {posts.map((post) => (
                   <article
                     key={post.slug}
-                    className="flex h-full flex-col rounded-2xl border border-border/70 bg-card/70 p-5 text-left shadow-sm transition hover:-translate-y-1 hover:border-accent/60"
+                    className="flex h-[320px] flex-col overflow-hidden rounded-2xl border border-border/70 bg-card/70 p-5 text-left shadow-sm transition hover:-translate-y-1 hover:border-accent/60"
                   >
                     <span className="text-xs font-semibold uppercase tracking-wide text-accent">
                       {formatDate(post.publishedAt, post.updatedAt)}
@@ -117,7 +145,17 @@ const BlogPage = async () => {
                         {post.title}
                       </Link>
                     </h3>
-                    <p className="mt-2 flex-1 text-sm text-muted-foreground">{post.excerpt}</p>
+                    <p
+                      className="mt-2 flex-1 text-sm text-muted-foreground"
+                      style={{
+                        display: "-webkit-box",
+                        WebkitLineClamp: 4,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                      }}
+                    >
+                      {post.excerpt}
+                    </p>
                     {post.tags?.length ? (
                       <div className="mt-4 flex flex-wrap gap-2 text-xs text-muted-foreground">
                         {post.tags.map((tag) => (
